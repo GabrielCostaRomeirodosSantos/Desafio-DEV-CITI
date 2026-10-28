@@ -3,17 +3,18 @@
   "version": "1.0.0",
   "private": true,
   "license": "MIT",
-  "scripts": {
-    "dev": "concurrently \"ts-node-dev --poll --exit-child -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/server.ts\" \"prisma generate --watch\"",
-    "generate": "prisma generate",
-    "migration": "cross-env DATABASE_HOST=localhost prisma migrate dev",
-    "migration:deploy": "prisma migrate deploy",
-    "studio": "cross-env DATABASE_HOST=localhost prisma studio",
-    "typecheck": "tsc --noEmit",
-    "build": "swc src --strip-leading-paths --out-dir dist",
-    "start": "node dist/server.js",
-    "prod": "yarn migration:deploy && yarn build && yarn start"
-  },
+   "scripts": {
+     "dev": "concurrently \"ts-node-dev --poll --exit-child -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/server.ts\" \"prisma generate --watch\"",
+     "generate": "prisma generate",
+     "migration": "cross-env DATABASE_HOST=localhost prisma migrate dev",
+     "studio": "cross-env DATABASE_HOST=localhost prisma studio",
+     "seed": "cross-env DATABASE_HOST=localhost ts-node --transpile-only prisma/seed.ts",
+     "typecheck": "tsc --noEmit",
+     "build": "swc src --strip-leading-paths --out-dir dist",
+     "start": "node dist/server.js",
+     "prod": "yarn migration:deploy && yarn build && yarn start",
+     "migration:deploy": "prisma migrate deploy"
+   },
   "dependencies": {
     "@prisma/client": "5.22.0",
     "bcryptjs": "^2.4.3",
